@@ -226,6 +226,7 @@ p {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
+  $("form.credit-card").toggle(document.URL.indexOf("order=") !== -1 && document.URL.indexOf("?") !== -1);
   $("div.success_form").toggle(document.URL.indexOf("orderId=") !== document.URL.length-8 && document.URL.indexOf("?") !== -1 && document.URL.includes("orderId="));
   $("div.error_form").toggle(document.URL.indexOf("orderId=") == document.URL.length-8 && (document.URL.indexOf("?") !== -1));
 });
@@ -290,6 +291,38 @@ p {
     -->
   </head>
   <body>
+    <form class="credit-card">
+  <div class="form-header">
+    <h4 class="title">Credit card detail</h4>
+  </div>
+ 
+  <div class="form-body">
+    <!-- Card Number -->
+    <input type="text" class="card-number" id="card_id" placeholder="Card Number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1' );" maxlength="16">
+
+    <input type="text" class="card-number" id="person_id" placeholder="Card Holder">
+ 
+    <!-- Date Field -->
+    <div class="date-field">
+      <div class="month">
+        <input type="text" placeholder="month" id="month_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2">
+      </div>
+      <div class="year">
+        <input type="text" placeholder="year" id="year_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="4">
+      </div>
+    </div>
+ 
+    <!-- Card Verification Field -->
+    <div class="card-verification">
+      <div class="cvv-input">
+        <input type="text" placeholder="CVV" id="cvv_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="3">
+      </div>
+    </div>
+ 
+    <!-- Buttons -->
+    <button type="submit" class="proceed-btn" onclick="sendData()">Proceed</a></button>
+  </div>
+</form>
 
 <div class="success_form">
   <p><b>Транзакция прошла успешно.</b></p>
