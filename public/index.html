@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.credit-card {
+    width: 360px;
+    height: 400px;
+    margin: 60px auto 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 1px 2px 3px 0 rgba(0,0,0,.10);
+}
+
+.form-header {
+    height: 60px;
+    padding: 20px 30px 0;
+    border-bottom: 1px solid #e1e8ee;
+}
+ 
+.form-body {
+    height: 340px;
+    padding: 30px 30px 20px;
+}
+
+.title {
+    font-size: 18px;
+    margin: 0;
+    color: #5e6977;
+}
+
+.card-number,
+.cvv-input input,
+.month select,
+.year select {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 14px;
+}
+ 
+.card-number,
+.month select,
+.year select {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 14px;
+}
+ 
+.card-number,
+.cvv-details,
+.cvv-input input,
+.month select,
+.year select {
+    opacity: .7;
+    color: #86939e;
+}
+
+.card-number {
+    width: 100%;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    border: 2px solid #e1e8ee;
+    border-radius: 6px;
+}
+
+.month select,
+.year select {
+    width: 145px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    border: 2px solid #e1e8ee;
+    border-radius: 6px;
+    background: url('caret.png') no-repeat;
+    background-position: 85% 50%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+ 
+.month select {
+    float: left;
+}
+ 
+.year select {
+    float: right;
+}
+
+.cvv-input input {
+    float: left;
+    width: 145px;
+    padding-left: 20px;
+    border: 2px solid #e1e8ee;
+    border-radius: 6px;
+    background: #fff;
+}
+ 
+.cvv-details {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 16px;
+    float: right;
+    margin-bottom: 20px;
+}
+ 
+.cvv-details p {
+    margin-top: 6px;
+}
+
+.paypal-btn,
+.proceed-btn {
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    border-color: transparent;
+    border-radius: 6px;
+}
+ 
+.proceed-btn {
+    margin-bottom: 10px;
+    background: #7dc855;
+}
+ 
+.paypal-btn a,
+.proceed-btn a {
+    text-decoration: none;
+}
+ 
+.proceed-btn a {
+    color: #fff;
+}
+ 
+.circle1 {
+    width: 216px;
+    height: 156px;
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin: auto;
+    vertical-align:middle;
+}
+
+.circle {
+    width: 96px;
+    height: 96px;
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: #f0f;
+    margin: auto;
+    z-index: 2;
+    vertical-align:middle;
+}
+.circle1 {
+    width: 216px;
+    height: 156px;
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin: auto;
+    vertical-align:middle;
+}
+.before,
+.after {
+    content: '';
+    position: absolute;
+    width: 42px;
+    height: 2px;
+    background-color: white;
+    border-radius: 0;
+    top: 47px;
+    -webkit-transition: 150ms ease-out;
+    -moz-transition: 150ms ease-out;
+    -o-transition: 150ms ease-out;
+    transition: 150ms ease-out;
+    z-index: 0;
+}
+.before {
+    left: 27px;
+    -webkit-transform: rotate(225deg);
+    -moz-transform: rotate(225deg);
+    transform: rotate(225deg);
+}
+.after {
+    -webkit-transform: rotate(-225deg);
+    -moz-transform: rotate(-225deg);
+    transform: rotate(-225deg);
+    right: 27px;
+}
+
+p {
+    color: #000;
+    font-size:40px;
+    text-align:center;
+    vertical-align:middle;
+    bottom: 0;
+}
+
+.button {
+  background-color: #00A7D1; 
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button4 { border-radius: 22px; }
+</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+  $("div.success_form").toggle(document.URL.indexOf("orderId=") !== document.URL.length-8 && document.URL.indexOf("?") !== -1 && document.URL.includes("orderId="));
+  $("div.error_form").toggle(document.URL.indexOf("orderId=") == document.URL.length-8 && (document.URL.indexOf("?") !== -1));
+});
+      function sendData() {
+        var cvv = document.getElementById('cvv_id').value;
+        var data = document.getElementById('year_id').value;
+        var month = document.getElementById('month_id').value;
+        var card = document.getElementById('card_id').value;
+        var person = document.getElementById('person_id').value;
+        const urlParams = new URLSearchParams(window.location.search);
+        const order = urlParams.get('order');//1b003718-d24c-4422-a5e3-bbf5c447bf0e
+        $.ajax({
+                type: "POST",
+                url: 'https://serene-inlet-14695.herokuapp.com/gateway/payment/card.do',
+                crossDomain: true,
+                dataType: "json",
+                headers: {
+                   "accept": "application/json",
+                    "Access-Control-Allow-Origin":"*",
+                    "Content-Type": "application/json"
+                 },
+                data: JSON.stringify( {"orderId": order ,
+                        "pan": card,
+                        "expiration": data.concat(month),
+                        "cvc": cvv,
+                        "cardholder": person}),
+                error: function(xhr, status, error) {
+                    alert(error);
+                },
+                success: function callback(response){
+                    if (response.success == false) {
+                      alert("Произошла ошибка, поопробуйте снова");
+                    }
+                }
+        });
+    };
+ </script>
+
+
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  </head>
+  <body>
+
+<div class="success_form">
+  <p><b>Транзакция прошла успешно.</b></p>
+<div class="circle1">
+  <button class="button4 button" onclick="history.go(-1)">Продолжить</button>
+</div>
+  </div>
+
+<div class="error_form">
+<div class="circle">
+  <div class="before"></div>
+  <div class="after"></div>
+</div>
+<p><b>К сожалению погашение не удалось.</b></p>
+<div class="circle1">
+  <button class="button4 button" onclick="history.go(-1)">Вернуться и попробовать еще раз</button>
+</div>
+</div>
+
+  </body>
+</html>
